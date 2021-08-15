@@ -1,0 +1,6 @@
+Apply debuff fo ~2 minutes
+
+when debuff is at 1 frame left, fire the attack and apply the i-frames / freeze buff.
+
+projectile - central sun hides behind the player, fires out Novae over several seconds
+Novae grow and spin in alternating directions

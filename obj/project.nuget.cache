@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "8vM/uZmG0TjuIIQiysI+Yagk74FeC1Fe1WVyBFB3M/QAjL2CxsV+cEtq3gyJZR/nZoymh60RXSVQP/4DlyM3ww==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Michael\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\BorderEscapeMod\\BorderEscapeMod.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Michael\\.nuget\\packages\\tmodloader.codeassist\\0.1.2\\tmodloader.codeassist.0.1.2.nupkg.sha512"
+  ],
+  "logs": []
+}
