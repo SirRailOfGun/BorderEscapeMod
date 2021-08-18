@@ -1,0 +1,13 @@
+How is Supreme Calamitas Pressure even real lol? just graze lol. 
+This mod adds new weapons based on the spellcards from Touhou 12.3: Hisotensoku (and the ones it inherrited from Scarlet Weather Rhapsody)
+
+Current Weapons added:
+"Subterranean Sun"
+ - creates a massive static projectile above you that deals massive damage to mobs that fly into it, and radiates out large projectiles.
+Control "Self Tokomak"
+ - provides the player with the "Self Tokomak" buff that provides 15% increased melee and magic damage, but negates all % damage reduction.
+Ground Melt
+ - Fires a series of beams that sweep forwards, creating explosions that damage grounded enemies.
+
+Abyss Nova
+ - inflicts the "Abyss Nova" debuff that reduces defence and prevents dashing, but creates a massive explosion when it wears off.
