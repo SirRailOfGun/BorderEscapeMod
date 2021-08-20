@@ -107,7 +107,7 @@ namespace BorderEscapeMod.Items
 				case "Marisa":
 					SpiritRegenAmt = -2;
 					SpiritRegenRate = 120;
-					SpiritRegenDelayTime = 0;
+					SpiritRegenDelayTime = 1;
 					foreach (var effect in player.buffType)
                     {
 						if (effect > 0							//if effect is active
@@ -121,7 +121,7 @@ namespace BorderEscapeMod.Items
 				case "Patchy":
 					SpiritRegenAmt = 1;
 					SpiritRegenRate = 120;
-					SpiritRegenDelayTime = 0;
+					SpiritRegenDelayTime = 1;
 					break;
 				case "Okku":
 					SpiritCurrent += RegenOnDamage;
@@ -132,7 +132,6 @@ namespace BorderEscapeMod.Items
 			}
 			if (SpiritRegenDelay > (SpiritRegenDelayTime * 60) && SpiritRegenDelayTime > 0)
 			{
-				// For our resource lets make it regen slowly over time to keep it simple, let's use SpiritRegenTimer to count up to whatever value we want, then increase currentResource.
 				SpiritRegenTimer++; //Increase it by 60 per second, or 1 per tick.
 
 				if (SpiritRegenTimer > SpiritRegenRate && SpiritRegenRate > 0)
@@ -141,6 +140,7 @@ namespace BorderEscapeMod.Items
 					SpiritRegenTimer = 0;
 				}
 			}
+			//Handle Self Tokomak's Spirit conversion
 			if (SelfTokBuff && SpiritCurrent > 0)
             {
 				SpiritDegenTimer++;

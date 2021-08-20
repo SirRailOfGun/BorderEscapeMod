@@ -42,11 +42,13 @@ namespace BorderEscapeMod.Items.Equipables
 
 		public override void AddRecipes()
 		{
-			//ModRecipe recipe = new ModRecipe(mod);
-			//recipe.AddIngredient(ModContent.ItemType<EquipMaterial>(), 60);
-			//recipe.AddTile(ModContent.TileType<ExampleWorkbench>());
-			//recipe.SetResult(this);
-			//recipe.AddRecipe();
-		}
+            ModRecipe recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.HellstoneBar, 10);
+			recipe.AddIngredient(ItemID.SoulofFlight, 10);
+			recipe.AddIngredient(ItemID.Feather, 10);
+			recipe.AddTile(TileID.MythrilAnvil);
+            recipe.SetResult(this);
+            recipe.AddRecipe();
+        }
 	}
 }
