@@ -1,2 +1,43 @@
-Add invuln to the abyss nova invuln buff
-Add immobilization to the abyss nova invuln buff
+﻿Spirit Gauge is shit, add a good one that shows actual spirit orbs.
+Crafting materials have not been implemented yet.
+
+Reimu has no cards
+
+Marisa has no cards
+
+Sakuya has nothing
+
+Alice has nothing
+
+Patchy has nothing
+
+Youmu has nothing
+
+Remi has nothing
+
+Yuyuko has nothing
+
+Yukari has nothing
+
+Suika has nothing
+
+Bnuy has nothing
+
+Ayaya has nothing
+
+Komachi has nothing
+
+Iku has nothing
+
+Tenshi has nothing
+
+Sanae has nothing
+
+Cirno has nothing
+
+Chyna has nothing
+
+Self Tokomak seems broken; investigate buff not going away
+SubSun has no spirit cost
+
+Suwak has nothing
