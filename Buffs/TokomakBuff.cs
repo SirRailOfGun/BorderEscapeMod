@@ -3,6 +3,7 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using System;
 using BorderEscapeMod.NPCs;
+using BorderEscapeMod.Items;
 
 namespace BorderEscapeMod.Buffs
 {
@@ -11,24 +12,25 @@ namespace BorderEscapeMod.Buffs
         public override void SetDefaults()
         {
             DisplayName.SetDefault("Self Tokomak");
-            Description.SetDefault("Grants bonus Magic and Melee Damage, but negates armor due to excessive energies.");
-            Main.buffNoTimeDisplay[Type] = false;
+            //Description.SetDefault("Grants bonus Magic and Melee Damage, but negates armor due to excessive energies.");
+            Description.SetDefault("Drains your spirit to power up the next attack.");
+            Main.buffNoTimeDisplay[Type] = true;
             Main.debuff[Type] = false; //Add this so the nurse doesn't remove the buff when healing
         }
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.GetModPlayer<VisualsManager>().SelfTok = true;
-            player.endurance *= 0; //armor is ignored, since that's chump DR anyways
-            player.magicDamage += .15f;
-            player.meleeDamage += .15f; //Grant 15% damage
-        }
-        public override void Update(NPC npc, ref int buffIndex)
-        {
-            npc.GetGlobalNPC<TestNPC>().SelfTok = true;
-            //npc.endurance *= 0; //armor is ignored, since that's chump DR anyways
-            //npc.magicDamage += .15f;
-            //npc.meleeDamage += .15f; //Grant 15% damage
+            if (player.GetModPlayer<SpiritManager>().SpiritCurrent >= 0 && !player.GetModPlayer<SpiritManager>().ClearTokBuff)
+            {
+                player.GetModPlayer<VisualsManager>().SelfTok = true;
+                player.GetModPlayer<SpiritManager>().SelfTokBuff = true;
+            }
+            else
+            {
+                player.GetModPlayer<VisualsManager>().SelfTok = false;
+                player.GetModPlayer<SpiritManager>().SelfTokBuff = false;
+                player.ClearBuff(buffIndex);
+            }
         }
     }
 }

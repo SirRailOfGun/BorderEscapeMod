@@ -25,6 +25,8 @@ namespace BorderEscapeMod.Items
 
 		// Here we include a custom resource, similar to mana or health.
 		// Creating some variables to define the current value of our example resource as well as the current maximum value. We also include a temporary max value, as well as some variables to handle the natural regeneration of this resource.
+		public bool SelfTokBuff;
+		public bool ClearTokBuff;
 		public int SpiritCurrent;
 		public const int DefaultSpiritMax = 100;
 		public int SpiritMax;
@@ -35,10 +37,12 @@ namespace BorderEscapeMod.Items
 		public float AuxGrazeFactor;	//multiply damage by this to get spirit cost. only used by global graze cost modifiers
 		public float GrazeCap;			//maximum spirit spent on grazing
 		internal int SpiritRegenTimer = 0;
+		internal int SpiritDegenTimer = 0;
 		internal int SpiritRegenDelay = 0;
 		internal int RegenOnHit = 0;
 		internal int RegenOnKill = 0;
 		internal int RegenOnDamage = 0;
+		internal float damagebuff = 0;
 
 		public static readonly Color HealSpirit = new Color(187, 91, 201); // We can use this for CombatText, if you create an item that replenishes SpiritCurrent.
 
@@ -73,7 +77,11 @@ namespace BorderEscapeMod.Items
             RegenOnHit = 0;
 			RegenOnKill = 0;
 			RegenOnDamage = 0;
+			//damagebuff = 0;
 			SpiritMax2 = SpiritMax;
+			//ClearTokBuff = false;
+			SelfTokBuff = false;
+			SpiritRegenType = "";
 		}
 
 		public override void PostUpdateMiscEffects()
@@ -89,9 +97,9 @@ namespace BorderEscapeMod.Items
 			float SpiritRegenDelayTime = 0;	//seconds before regen starts after using spirit
 			switch (SpiritRegenType)
 			{
-				case "Template":
+				case "Template":	//Every regen type is named after the character to keep naming consistant.
 					break;
-				case "Reimu":
+				case "Reimu":		//need to make regen faster if not attacked at all for some time
 					SpiritRegenAmt = 1;
 					SpiritRegenRate = 3;
 					SpiritRegenDelayTime = 10;
@@ -133,11 +141,23 @@ namespace BorderEscapeMod.Items
 					SpiritRegenTimer = 0;
 				}
 			}
-
+			if (SelfTokBuff && SpiritCurrent > 0)
+            {
+				SpiritDegenTimer++;
+				if (SpiritDegenTimer > 10)
+				{
+					SpiritCurrent -= 1;
+					damagebuff += .05f;
+				}
+            }
+			else
+			{
+				player.GetModPlayer<SpiritManager>().ClearTokBuff = true;
+				damagebuff = 0;
+            }
 			// Limit SpiritCurrent from going over the limit imposed by SpiritMax.
 			SpiritCurrent = Utils.Clamp(SpiritCurrent, 0, SpiritMax2);
 			SpiritRegenDelay++;
-			Grazing -= 1;
 		}
         public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
         {
@@ -154,6 +174,11 @@ namespace BorderEscapeMod.Items
                 }
             }
             return base.PreHurt(pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource);
+        }
+        public override void ModifyWeaponDamage(Item item, ref float add, ref float mult, ref float flat)
+        {
+			mult += damagebuff;
+            base.ModifyWeaponDamage(item, ref add, ref mult, ref flat);
         }
         public override void PostHurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit)
         {

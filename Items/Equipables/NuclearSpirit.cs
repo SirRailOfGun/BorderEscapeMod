@@ -16,7 +16,7 @@ namespace BorderEscapeMod.Items.Equipables
 				"\n30% increased melee and magic damage " +
 				"\n+40 max mana " +
 				"\n10% reduced damage taken" +
-				"\n Gain spirit equal to 1/100th the damage you take" +
+				"\n Gain spirit equal to 1/10th the damage you take" +
 				"\n Gain 2 spirit when you hit an enemy");
 		}
 

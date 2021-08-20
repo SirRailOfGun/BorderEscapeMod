@@ -14,9 +14,8 @@ namespace BorderEscapeMod.Items.SpellCards
 				"\nOnce the limit is exceeded, the energies release a scorching sun which burns everything around." +
 				"\nThe sun's hitbox is very large and it can't be blocked." +
 				"\nAn intensely hot skill that will leave you vulnerable for a long while." +
-				"\nUses 5 spirit orbs.");
+				"\nUses 5 spirit orbs and can only be used with the Nuclear Spirit equipped");
 		}
-
 		public override void SetDefaults() {
 			item.noMelee = true;
 			item.magic = true;
@@ -30,6 +29,14 @@ namespace BorderEscapeMod.Items.SpellCards
 			item.useAnimation = 60;
 			item.value = Item.sellPrice(silver: 3);
 			spiritCost = 100;
+		}
+		public override bool CanUseItem(Player player)
+		{
+			if (player.GetModPlayer<SpiritManager>().SpiritRegenType == "Okku")
+			{
+				return base.CanUseItem(player);
+			}
+			return false;
 		}
 		public override void HoldItem(Player player)
 		{

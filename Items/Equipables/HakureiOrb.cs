@@ -4,16 +4,15 @@ using Terraria.ModLoader;
 
 namespace BorderEscapeMod.Items.Equipables
 {
-	public class HomeBrew : ModItem
+	public class HakureiOrb : ModItem
 	{
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault("Home Brew");
-			Tooltip.SetDefault("A magic potion that reinvigorates the body and mind. Do not ask what is in it." +
-				"\n+100 max mana " +
-				"\nGenerate spirit by drinking potions." +
-				"\nYou need to drink at least 3 potions for it to take effect.");
+			DisplayName.SetDefault("Divine Spirit");
+			Tooltip.SetDefault("A blessing that grants the user magic powers." +
+				"\nGenerate spirit after not using any for a while." +
+				"\nIt's faster if you don't attack either.");
 		}
 
 		public override void SetDefaults()
@@ -24,15 +23,15 @@ namespace BorderEscapeMod.Items.Equipables
 			item.rare = ItemRarityID.Green;
 			item.accessory = true;
 		}
-		public override bool CanEquipAccessory(Player player, int slot)
-		{
-			return base.CanEquipAccessory(player, slot);
-		}
-		public override void UpdateAccessory(Player player, bool hideVisual)
+        public override bool CanEquipAccessory(Player player, int slot)
+        {
+            return base.CanEquipAccessory(player, slot);
+        }
+        public override void UpdateAccessory(Player player, bool hideVisual)
 		{
 			var SpiritManager = player.GetModPlayer<SpiritManager>();
-			player.statManaMax2 += 100;
-			SpiritManager.SpiritRegenType = "Marisa";
+			//player.statManaMax2 += 100;
+			SpiritManager.SpiritRegenType = "Reimu";
 		}
 
 		public override void AddRecipes()

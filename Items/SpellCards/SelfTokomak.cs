@@ -9,7 +9,8 @@ namespace BorderEscapeMod.Items.SpellCards
 	{
 		public override void SetStaticDefaults() {
 			DisplayName.SetDefault("Control \"Self Tokomak\"");
-			Tooltip.SetDefault("Fills the body with immense nuclear energy, spiking combat power. Defence is sacrificed due to the heat.");
+			Tooltip.SetDefault("Fills the body with immense nuclear energy, spiking combat power. Leaves you drained." +
+				"\nCan only be used with the Nuclear Spirit equipped");
 		}
 
 		public override void SetDefaults() {
@@ -26,12 +27,20 @@ namespace BorderEscapeMod.Items.SpellCards
 			item.useAnimation = 60;
 			item.value = Item.sellPrice(silver: 3);
 		}
-
+        public override bool CanUseItem(Player player)
+        {
+			if (player.GetModPlayer<SpiritManager>().SpiritRegenType == "Okku")
+            {
+				return base.CanUseItem(player);
+			}
+			return false;
+        }
         public override void HoldItem(Player player)
         {
 			if (player.itemAnimation > 0)
 			{
-				player.AddBuff(ModContent.BuffType<Buffs.TokomakBuff>(), 5400);
+				player.GetModPlayer<SpiritManager>().ClearTokBuff = false;
+				player.AddBuff(ModContent.BuffType<Buffs.TokomakBuff>(), 10800);
             }
 			base.HoldItem(player);
         }
